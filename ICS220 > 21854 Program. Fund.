@@ -74,3 +74,9 @@ reservation = Reservation(reservation_id=202218303, guest=guest, room=room,
                           arrival_date="2024-10-01", 
                           departure_date="2024-10-15", 
                           number_of_guests=1)
+
+reservation_details = reservation.view_reservation()
+
+print("Reservation Details:")
+for key, value in reservation_details.items():
+    print(key + ": " + str(value))
