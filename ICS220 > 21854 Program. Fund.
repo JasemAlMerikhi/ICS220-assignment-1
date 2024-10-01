@@ -1,0 +1,7 @@
+class User:
+    def __init__(self, full_name, contact_email, phone_number, address, preferred_payment):
+        self._full_name = full_name
+        self._contact_email = contact_email
+        self._phone_number = phone_number
+        self._address = address  
+        self._preferred_payment = preferred_payment
