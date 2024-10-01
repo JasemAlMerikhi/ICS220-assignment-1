@@ -6,10 +6,28 @@ class User: #User Class
         self._address = address  
         self._preferred_payment = preferred_payment
 
-# Getting user details
+#Getting user details
   def get_user_info(self):
         return {"full_name": self._full_name,
             "contact_email": self._contact_email,
             "phone_number": self._phone_number,
             "address": self._address,
             "preferred_payment": self._preferred_payment}
+
+class Room: #Room Class
+    def __init__(self, room_id, bed_type, floor, price_per_night, facilities, pet_friendly=False):
+        self._room_id = room_id
+        self._bed_type = bed_type  
+        self._floor = floor  # Which floor the room is on
+        self._price_per_night = price_per_night
+        self._facilities = facilities  
+        self._pet_friendly = pet_friendly  #Extend for pet friendly rooms
+
+#Getting room details
+    def get_room_info(self):
+        return {"room_id": self._room_id,
+            "bed_type": self._bed_type,
+            "floor": self._floor,
+            "price_per_night": self._price_per_night,
+            "facilities": self._facilities,
+            "pet_friendly": self._pet_friendly}
