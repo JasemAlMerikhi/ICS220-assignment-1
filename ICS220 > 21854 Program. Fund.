@@ -47,7 +47,8 @@ class Reservation:
         self._departure_date = departure_date
         self._number_of_guests = number_of_guests
 
-    def view_reservation(self):
+
+    def view_reservation(self): #Viewing reservation details
         room_info = self._room.get_room_info()
         guest_info = self._guest.get_user_info()
         return {"reservation_id": self._reservation_id,
@@ -57,4 +58,19 @@ class Reservation:
             "arrival_date": self._arrival_date,
             "departure_date": self._departure_date,
             "number_of_guests": self._number_of_guests,
-            "pet_friendly": room_infoo['pet_friendly']}
+            "pet_friendly": room_info['pet_friendly']}
+
+#Creating room object thats pet friendly
+room = Room(room_id=402, bed_type="Queen", floor=4, price_per_night=150.75,
+            facilities=["Wi-Fi", "Mini Bar", "Air Conditioning"], pet_friendly=True)
+
+#Creating user object
+guest = User(full_name="Jasem AlMeraikhi", contact_email="JasemAlMeraikhi@hotmail.com", phone_number="050-123-4567", 
+             address="Al Bateen, Abu dhabi", 
+             preferred_payment={"type": "Visa", "last_digits": "1234"})
+
+#Creating reservation object
+reservation = Reservation(reservation_id=202218303, guest=guest, room=room, 
+                          arrival_date="2024-10-01", 
+                          departure_date="2024-10-15", 
+                          number_of_guests=1)
