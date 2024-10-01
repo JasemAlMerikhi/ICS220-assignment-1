@@ -47,4 +47,14 @@ class Reservation:
         self._departure_date = departure_date
         self._number_of_guests = number_of_guests
 
-
+    def view_reservation(self):
+        room_info = self._room.get_room_info()
+        guest_info = self._guest.get_user_info()
+        return {"reservation_id": self._reservation_id,
+            "guest_name": guest_info['full_name'],
+            "contact_email": guest_info['contact_email'],
+            "room_id": room_info['room_id'],
+            "arrival_date": self._arrival_date,
+            "departure_date": self._departure_date,
+            "number_of_guests": self._number_of_guests,
+            "pet_friendly": room_infoo['pet_friendly']}
