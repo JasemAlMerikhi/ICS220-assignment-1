@@ -1,31 +1,33 @@
-class User: #User Class
+class User:  # User Class
     def __init__(self, full_name, contact_email, phone_number, address, preferred_payment):
         self._full_name = full_name
         self._contact_email = contact_email
         self._phone_number = phone_number
-        self._address = address  
+        self._address = address
         self._preferred_payment = preferred_payment
 
-#Getting user details
+    # Getting user details
     def get_user_info(self):
-        return {"full_name": self._full_name,
+        return {
+            "full_name": self._full_name,
             "contact_email": self._contact_email,
             "phone_number": self._phone_number,
             "address": self._address,
             "preferred_payment": self._preferred_payment}
 
-class Room: #Room Class
+class Room:  # Room Class
     def __init__(self, room_id, bed_type, floor, price_per_night, facilities, pet_friendly=False):
         self._room_id = room_id
-        self._bed_type = bed_type  
+        self._bed_type = bed_type  # Type of bed (e.g., "Queen," "King")
         self._floor = floor  # Which floor the room is on
         self._price_per_night = price_per_night
-        self._facilities = facilities  
-        self._pet_friendly = pet_friendly  #Extend for pet friendly rooms
+        self._facilities = facilities
+        self._pet_friendly = pet_friendly  # Extend for pet-friendly rooms
 
-#Getting room details
+    # Getting room details
     def get_room_info(self):
-        return {"room_id": self._room_id,
+        return {
+            "room_id": self._room_id,
             "bed_type": self._bed_type,
             "floor": self._floor,
             "price_per_night": self._price_per_night,
@@ -41,48 +43,56 @@ class Room: #Room Class
 class Reservation:
     def __init__(self, reservation_id, guest, room, arrival_date, departure_date, number_of_guests):
         self._reservation_id = reservation_id
-        self._guest = guest  
-        self._room = room  
+        self._guest = guest
+        self._room = room
         self._arrival_date = arrival_date
         self._departure_date = departure_date
         self._number_of_guests = number_of_guests
+        self._is_canceled = False  # To track if the reservation is canceled
 
-
-    def view_reservation(self): #Viewing reservation details
+    def view_reservation(self):  # Viewing reservation details
         room_info = self._room.get_room_info()
         guest_info = self._guest.get_user_info()
-        return {"reservation_id": self._reservation_id,
+        return {
+            "reservation_id": self._reservation_id,
             "guest_name": guest_info['full_name'],
             "contact_email": guest_info['contact_email'],
             "room_id": room_info['room_id'],
+            "bed_type": room_info['bed_type'],  # Include bed type in the reservation details
             "arrival_date": self._arrival_date,
             "departure_date": self._departure_date,
             "number_of_guests": self._number_of_guests,
-            "pet_friendly": room_info['pet_friendly']}
+            "pet_friendly": room_info['pet_friendly'],
+            "status": "Canceled" if self._is_canceled else "Active"
+        }
 
 class Cancellation:
     def __init__(self, reservation):
         self.reservation = reservation
 
-    def cancel(self):
-        return f"Reservation {self.reservation._reservation_id} has been canceled."        
-        
-        
-#Creating room object thats pet friendly
+    def cancel(self):  # Cancel the reservation and change the status
+        if not self.reservation._is_canceled:
+            self.reservation._is_canceled = True
+            return f"Reservation {self.reservation._reservation_id} has been canceled."
+        else:
+            return "Reservation is already canceled."
+
+# Creating a pet-friendly room object
 room = Room(room_id=402, bed_type="Queen", floor=4, price_per_night=150.75,
             facilities=["Wi-Fi", "Mini Bar", "Air Conditioning"], pet_friendly=True)
 
-#Creating user object
-guest = User(full_name="Jasem AlMeraikhi", contact_email="JasemAlMeraikhi@hotmail.com", phone_number="050-123-4567", 
-             address="Al Bateen, Abu dhabi", 
+# Creating user object
+guest = User(full_name="Jasem AlMeraikhi", contact_email="JasemAlMeraikhi@hotmail.com", phone_number="050-123-4567",
+             address="Al Bateen, Abu Dhabi",
              preferred_payment={"type": "Visa", "last_digits": "1234"})
 
-#Creating reservation object
-reservation = Reservation(reservation_id=202218303, guest=guest, room=room, 
-                          arrival_date="2024-10-01", 
-                          departure_date="2024-10-15", 
+# Creating reservation object
+reservation = Reservation(reservation_id=202218303, guest=guest, room=room,
+                          arrival_date="2024-10-01",
+                          departure_date="2024-10-15",
                           number_of_guests=1)
 
+# Viewing reservation details
 reservation_details = reservation.view_reservation()
 
 print("Reservation Details:")
