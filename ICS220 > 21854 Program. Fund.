@@ -60,6 +60,14 @@ class Reservation:
             "number_of_guests": self._number_of_guests,
             "pet_friendly": room_info['pet_friendly']}
 
+class Cancellation:
+    def __init__(self, reservation):
+        self.reservation = reservation
+
+    def cancel(self):
+        return f"Reservation {self.reservation._reservation_id} has been canceled."        
+        
+        
 #Creating room object thats pet friendly
 room = Room(room_id=402, bed_type="Queen", floor=4, price_per_night=150.75,
             facilities=["Wi-Fi", "Mini Bar", "Air Conditioning"], pet_friendly=True)
