@@ -7,7 +7,7 @@ class User: #User Class
         self._preferred_payment = preferred_payment
 
 #Getting user details
-  def get_user_info(self):
+    def get_user_info(self):
         return {"full_name": self._full_name,
             "contact_email": self._contact_email,
             "phone_number": self._phone_number,
